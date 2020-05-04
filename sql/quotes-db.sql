@@ -3,16 +3,22 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
---
--- Table structure for table `l9_author`
---
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+	`userId` tinyint(2) NOT NULL,
+	`username` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
+	`password` varchar(500) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
 DROP TABLE IF EXISTS `l9_author`;
 CREATE TABLE `l9_author` (
   `authorId` mediumint(9) NOT NULL,
   `firstName` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
   `lastName` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `dob` date NOT NULL,
-  `dod` date DEFAULT NULL,
+  `dob` varchar(50) NOT NULL,
+  `dod` varchar(50) DEFAULT NULL,
   `sex` char(1) COLLATE utf8_unicode_ci NOT NULL,
   `profession` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `country` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
@@ -20,9 +26,6 @@ CREATE TABLE `l9_author` (
   `biography` varchar(500) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `l9_author`
---
 
 INSERT INTO `l9_author` (`authorId`, `firstName`, `lastName`, `dob`, `dod`, `sex`, `profession`, `country`, `portrait`, `biography`) VALUES
 (1, 'Albert', 'Einstein', '1879-03-14', '1955-04-18', 'M', 'Theoretical physicist', 'Germany', 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Albert_Einstein_Head.jpg/900px-Albert_Einstein_Head.jpg', 'Albert Einstein was born at Ulm, in Württemberg, Germany, on March 14, 1879. In 1901, after gaining his diploma, he acquired Swiss citizenship and, as he was unable to find a teaching post, he accepted a position as technical assistant in the Swiss Patent Office. In 1905 he obtained his doctor’s degree. Einstein always appeared to have a clear view of the problems of physics and the determination to solve them. He had a strategy of his own and was able to visualize the main stages on the way to '),
@@ -33,17 +36,6 @@ INSERT INTO `l9_author` (`authorId`, `firstName`, `lastName`, `dob`, `dod`, `sex
 (6, 'Helen', 'Keller', '1880-06-27', '1968-01-30', 'F', 'Author', 'USA', 'https://upload.wikimedia.org/wikipedia/commons/3/3e/Helen_Keller_circa_1920_-_restored.jpg', 'Helen Adams Keller (June 27, 1880 – June 1, 1968) was an American author, political activist, and lecturer. She was the first deaf-blind person to earn a Bachelor of Arts degree. The story of Keller and her teacher, Anne Sullivan, was made famous by Keller\'s autobiography, The Story of My Life, and its adaptations for film and stage, The Miracle Worker. Her birthplace in West Tuscumbia, Alabama, is now a museum and sponsors an annual \"Helen Keller Day.\" Her June 27 birthday is commemorated as He'),
 (7, 'Benjamin', 'Franklin', '1706-01-17', '1790-06-16', 'M', 'Scientist', 'USA', 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/857287e7-d073-4c62-812e-aae249f67326/d4hjp6a-b1e2522e-2d43-42de-95d7-1ef21bb68d70.jpg/v1/fil', 'Benjamin Franklin was America’s scientist, inventor, politician, philanthropist and business man. He is best known as one of our Founding Fathers and the only one who signed all three documents that freed America from Britain: The Declaration of Independence. The American Constitution and The Treaty of Paris.');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `l9_quotes`
---
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
-  `userId` tinyint(2) NOT NULL,
-  `username` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(25) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 DROP TABLE IF EXISTS `l9_quotes`;
 
@@ -89,11 +81,11 @@ INSERT INTO `l9_quotes` (`quoteId`, `quote`, `authorId`, `category`, `likes`) VA
 (30, 'Don’t throw stones at your neighbors, if your own windows are glass.', 7, 'Wisdom', 83),
 (31, 'One doesn\'t recognize the really important moments in one\'s life until it\'s too late.', 2, 'Wisdom', 36),
 (32, 'Your success and happiness lies in you. Resolve to keep happy, and your joy and you shall form an invincible host against difficulties.', 6, 'Inspirational', 86);
-
 --
--- Indexes for dumped tables
+-- Indexes for table `users`
 --
-
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`userId`);
 --
 -- Indexes for table `l9_author`
 --
@@ -101,30 +93,17 @@ ALTER TABLE `l9_author`
   ADD PRIMARY KEY (`authorId`);
 
 --
--- Indexes for table `l9_quotes`
---
 ALTER TABLE `l9_quotes`
   ADD PRIMARY KEY (`quoteId`);
-  
+
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`userId`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `l9_author`
+  MODIFY `userId` tinyint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  
 --
 ALTER TABLE `l9_author`
   MODIFY `authorId` mediumint(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `l9_quotes`
---
 ALTER TABLE `l9_quotes`
   MODIFY `quoteId` mediumint(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
-  
-ALTER TABLE `users`
-  MODIFY `userId` tinyint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 COMMIT;
