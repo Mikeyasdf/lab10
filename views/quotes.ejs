@@ -1,0 +1,24 @@
+<%- include ('templates/header'); -%>
+
+<div class='container'>
+    <div class='jumbotron'>
+        <div class='row'>
+            <div class='col-sm-4'></div>
+            <button class='col-sm-4 btn btn-info'onclick='location.href="/";'>Search Again</button>
+            <div class='col-sm-4'></div>
+        </div>
+    </div>
+    
+    <% if(!authors){%>
+        <h1 class='col-sm-12'>Error nothing found!</h1>
+    <% }else{%>
+        <h3> Quotes: "<%=keyword%>"</h3>
+        <ul>
+            <% authors.forEach(function(author){%>
+                <li><%=author.quote%> <a href='/author/<%=author.authorId%>'><%=author.lastName%></a></li>
+            <% });%>
+        </ul>
+    <% }%>
+</div>
+
+<%- include ('templates/footer'); -%>
